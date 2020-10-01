@@ -3,3 +3,4 @@
     hosts: app_servers
     roles:
       - uwsgi
+      - agama

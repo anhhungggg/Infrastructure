@@ -18,3 +18,15 @@
   get_url:
     url: https://raw.githubusercontent.com/hudolejev/agama/master/agama.py
     dest: /opt/agama
+- name: configure nginx
+  become: yes
+  copy:
+    src: ./files/nginx.conf
+    dest: /etc/nginx/sites-enabled/default
+  notify: restart nginx
+- name: configure agama
+  become: yes
+  copy:
+    src: ./files/agama.ini
+    dest: /etc/uwsgi/apps-enabled/agama.ini
+  notify: restart uwsgi

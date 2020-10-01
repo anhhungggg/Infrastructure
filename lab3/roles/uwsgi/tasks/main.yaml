@@ -1,4 +1,4 @@
-- name: Install uWSGI packages
+- name: Install dependencies and uWSGI packages
   become: yes
   apt:
     pkg:
