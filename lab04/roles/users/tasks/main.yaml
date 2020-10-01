@@ -1,0 +1,20 @@
+- name:  Create user juri
+  become: yes
+  user:
+    name: juri
+- name:  Create user roman
+  become: yes
+  user:
+    name: roman
+- name: Set ssh key for juri
+  become: yes
+  authorized_key:
+    user: juri
+    state: present
+    key: https://github.com/hudolejev.keys
+- name: Set ssh key for roman
+  become: yes
+  authorized_key:
+    user: roman
+    state: present
+    key: https://github.com/romankuchin.keys
