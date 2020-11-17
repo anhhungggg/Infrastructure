@@ -1,0 +1,8 @@
+- name: restart bind_exporter
+  service:
+    name: bind_exporter
+    state: restarted
+- name: daemon reload
+  shell: systemctl daemon-reload
+- name: hash
+  shell: hash -r
