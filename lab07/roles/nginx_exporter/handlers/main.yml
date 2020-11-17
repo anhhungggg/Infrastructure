@@ -1,0 +1,12 @@
+- name: restart nginx_exporter
+  service:
+    name: nginx_prometheus_exporter
+    state: restarted
+- name: daemon reload
+  shell: systemctl daemon-reload
+- name: hash
+  shell: hash -r
+- name: restart nginx
+  service:
+    name: nginx
+    state: restarted

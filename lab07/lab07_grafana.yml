@@ -1,6 +1,7 @@
 ---
-  - name: install mysql_exporter
-    hosts: all
+  - name: install exporters
+    hosts: vm02
     become: yes
     roles:
-      - mysql_exporter
+#      - mysql_exporter
+      - nginx_exporter
