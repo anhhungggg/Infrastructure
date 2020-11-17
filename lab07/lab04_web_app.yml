@@ -1,0 +1,11 @@
+---
+  - name: App server
+    hosts: app_servers
+    roles:
+      - uwsgi
+      - agama
+
+  - name: Database server
+    hosts: db_servers
+    roles:
+      - mysql

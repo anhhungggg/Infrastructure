@@ -1,0 +1,29 @@
+- name: install mysql
+  become: yes
+  apt:
+    pkg:
+      - mysql-server
+      - python3-pymysql
+    state: present
+
+- name: configure mysql
+  become: yes
+  copy:
+    src: ./files/override.cnf
+    dest: /etc/mysql/mysql.conf.d/override.cnf
+  notify: restart mysql
+
+- name: create mysql database
+  become: yes
+  mysql_db:
+    name: "{{ mysql_database }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: create mysql user
+  become: yes
+  mysql_user:
+    name: "{{ mysql_user }}"
+    password: "{{ mysql_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    priv: "{{ mysql_database }}.*:ALL"
+    host: "%"
