@@ -1,0 +1,23 @@
+server {
+  listen 80 default;
+  root /usr/share/nginx/www;
+  index index.html index.htm;
+
+  location /grafana {
+   proxy_pass http://localhost:3000/login;
+  }
+
+  location /bind-metrics {
+    proxy_pass http://localhost:9119/metrics;
+  }
+
+  location /mysql-metrics {
+    proxy_pass http://localhost:9104/metrics;
+  }
+
+  location /nginx-metrics {
+    proxy_pass http://localhost:9113/metrics;
+  }
+
+
+}

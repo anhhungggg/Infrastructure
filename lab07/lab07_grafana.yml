@@ -1,8 +1,0 @@
----
-  - name: install exporters
-    hosts: vm01
-    become: yes
-    roles:
-#      - mysql_exporter
-#      - nginx_exporter
-      - bind_exporter

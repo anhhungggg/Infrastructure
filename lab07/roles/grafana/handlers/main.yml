@@ -1,0 +1,9 @@
+- name: restart nginx
+  service:
+    name: nginx
+    state: restarted
+
+- name: restart grafana
+  service:
+    name: grafana-server
+    state: restarted
