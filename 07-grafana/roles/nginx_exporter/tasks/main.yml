@@ -1,8 +1,8 @@
-- name: make sure nginx is installed
-  become: yes
-  apt:
-    name: nginx
-    state: present
+# - name: make sure nginx is installed
+#   become: yes
+#   apt:
+#     name: nginx
+#     state: present
 
 - name: open endpoint for stub_status
   become: yes
@@ -58,8 +58,8 @@
     src:  nginx_prometheus_exporter.service.j2
     dest: /etc/systemd/system/nginx_prometheus_exporter.service
   notify:
-    - daemon reload
     - restart nginx_exporter
+    - daemon reload
     - hash
 
 - name: start nginx_exporter

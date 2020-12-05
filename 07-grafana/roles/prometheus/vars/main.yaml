@@ -4,6 +4,7 @@ jobs:
     targets:
       - vm01.skaldr.io
       - vm02.skaldr.io
+
   - name: bind
     port: 9119
     targets:
@@ -12,6 +13,12 @@ jobs:
 
   - name: mysql
     port: 9104
+    targets:
+      - vm01.skaldr.io
+      - vm02.skaldr.io
+
+  - name: nginx
+    port: 9113
     targets:
       - vm01.skaldr.io
       - vm02.skaldr.io

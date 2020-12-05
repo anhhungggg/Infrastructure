@@ -15,10 +15,10 @@
   notify:
     - Restart nginx
 
-- name: Nginx config
-  become: yes
-  template:
-    src: node_exporter.conf
-    dest: /etc/nginx/sites-enabled/node_exporter.conf
-  notify:
-    - Restart nginx
+# - name: Nginx config
+#   become: yes
+#   template:
+#     src: node_exporter.conf
+#     dest: /etc/nginx/sites-enabled/node_exporter.conf
+#   notify:
+#     - Restart nginx

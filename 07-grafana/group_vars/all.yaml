@@ -9,7 +9,7 @@ mysql_password: !vault |
           3133363866376238330a313737633935616333643031646135636639316631303232313232366263
           3063
 dedicated_exporter_group: exporters
-dedicated_exporter_user: mysql_exporter
+dedicated_exporter_user: exporter
 mysql_exporter_user: mysql_exporter
 mysql_exporter_password: !vault |
           $ANSIBLE_VAULT;1.1;AES256
