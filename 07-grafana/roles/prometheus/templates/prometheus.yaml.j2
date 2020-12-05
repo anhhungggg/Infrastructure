@@ -13,8 +13,8 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
 
-  - job_name: linux
+  {% for job in jobs -%}
+  - job_name: {{ job.name }}
     static_configs:
-      - targets:
-        - 'vm01.skaldr.io:9100'
-        - 'vm02.skaldr.io:9100'
+      - targets: [{% for target in job.targets -%}'{{ target }}:{{ job.port }}',{% endfor %}]
+  {% endfor %}

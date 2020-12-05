@@ -1,4 +1,4 @@
-mysql_host: 192.168.42.73
+mysql_host: 192.168.42.59
 mysql_database: agama
 mysql_user: agama
 mysql_password: !vault |
@@ -35,6 +35,6 @@ records:
   - type: A
     entries:
       - name: vm01.skaldr.io.
-        address: 192.168.42.155
+        address: 192.168.42.59
       - name: vm02.skaldr.io.
-        address: 192.168.42.131
+        address: 192.168.42.118

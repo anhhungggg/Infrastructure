@@ -4,3 +4,5 @@
     tasks:
       - debug:
           var: hostvars['vm01']['ansible_default_ipv4']['address']
+      - debug:
+          var: hostvars['vm02']['ansible_default_ipv4']['address']
