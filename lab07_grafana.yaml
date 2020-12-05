@@ -1,0 +1,10 @@
+---
+  - name: install exporters
+    hosts: vm02
+    become: yes
+    roles:
+      # - mysql_exporter
+      # - nginx_exporter
+      # - bind_exporter
+      # - grafana
+      - prometheus
