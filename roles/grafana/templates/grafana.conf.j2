@@ -26,4 +26,9 @@
           proxy_pass http://vm02.skaldr.io:9090;
   }
 
+  location / {
+		uwsgi_pass localhost:5000;
+		include uwsgi_params;
+	}
+
 }

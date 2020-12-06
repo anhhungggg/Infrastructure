@@ -25,7 +25,8 @@
   template:
     src: grafana.conf.j2
     dest: /etc/nginx/sites-available/grafana.conf
-
+  notify:
+    - restart nginx
 - name: symlink page
   become: yes
   file:
