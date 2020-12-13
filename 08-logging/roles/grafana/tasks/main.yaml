@@ -1,0 +1,52 @@
+- name: install dependencies
+  become: yes
+  apt:
+    pkg:
+    - apt-transport-https
+    - wget
+
+- name: add grafana gpg key
+  become: yes
+  apt_key:
+    url: https://packages.grafana.com/gpg.key
+    state: present
+
+- name: add repo for stable release
+  become: yes
+  shell: echo "deb https://packages.grafana.com/oss/deb stable main" | tee -a /etc/apt/sources.list.d/grafana.list
+
+- name: install grafana
+  apt:
+    name: grafana
+    update_cache: yes
+
+- name: configure nginx homepage for grafana
+  become: yes
+  template:
+    src: grafana.conf.j2
+    dest: /etc/nginx/sites-available/grafana.conf
+  notify:
+    - restart nginx
+- name: symlink page
+  become: yes
+  file:
+    src: /etc/nginx/sites-available/grafana.conf
+    dest: /etc/nginx/sites-enabled/grafana.conf
+    state: link
+  notify:
+    - restart nginx
+
+- name: configure grafana.ini
+  become: yes
+  template:
+    src: grafana.ini.j2
+    dest: /etc/grafana/grafana.ini
+  notify:
+    - restart grafana
+
+- name: make sure grafana run
+  become: yes
+  service:
+    name: grafana-server
+    state: started
+    enabled: yes

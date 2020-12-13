@@ -1,0 +1,10 @@
+- name: daemon reload
+  shell: systemctl daemon-reload
+
+- name: hash
+  shell: hash -r
+
+- name: restart pinger
+  service:
+    name: pinger
+    state: restarted

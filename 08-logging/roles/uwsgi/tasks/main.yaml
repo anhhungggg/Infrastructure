@@ -1,0 +1,6 @@
+- name: Install dependencies and uWSGI packages
+  become: yes
+  apt:
+    pkg:
+      - uwsgi
+      - uwsgi-plugin-python3

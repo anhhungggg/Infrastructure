@@ -1,0 +1,10 @@
+[Unit]
+Description=pinger
+
+[Service]
+User={{pinger_username}}
+Group={{pinger_group}}
+ExecStart=/usr/local/bin/pinger.sh
+
+[Install]
+WantedBy=multi-user.target

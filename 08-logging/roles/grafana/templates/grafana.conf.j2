@@ -1,5 +1,4 @@
  server {
-  server_name {% if dns_role == "master" %}vm01.skaldr.io{% else %}vm02.skaldr.io{% endif %};
   listen 80;
   root /usr/share/nginx/www;
   index index.html index.htm;
@@ -31,11 +30,5 @@
 		uwsgi_pass localhost:5000;
 		include uwsgi_params;
 	}
-}
 
-server {
-  server_name influxdb.skaldr.io;
-  location / {
-    proxy_pass http://localhost:8086;
-  }
 }

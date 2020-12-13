@@ -1,0 +1,21 @@
+- name: install influx db
+  become: yes
+  apt:
+    name: influxdb
+    update_cache: yes
+    state: present
+
+- name: install additional package
+  become: yes
+  apt:
+    name: influxdb-client
+    update_cache: yes
+    state: present
+
+- name: setup reverse proxy for influxdb
+  become: yes
+  template:
+    src: grafana.conf.j2
+    dest: /etc/nginx/sites-enabled/grafana.conf
+  notify:
+    - restart nginx

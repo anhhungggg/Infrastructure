@@ -1,0 +1,6 @@
+---
+  - name: logging play
+    hosts: vm02
+    become: yes
+    roles:
+      - bind

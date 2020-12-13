@@ -2,7 +2,6 @@
   become: yes
   apt:
     name: bind9
-    
 - name: start bind9 if not running
   become: yes
   service:
@@ -34,8 +33,6 @@
     dest: /etc/bind/db.skaldr
   notify:
   - bind reload db
-  tags:
-  - config zone
 
 - name: fix resolv.conf
   become: yes

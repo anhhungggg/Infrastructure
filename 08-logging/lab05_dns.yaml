@@ -1,0 +1,5 @@
+---
+  - name: dns server
+    hosts: all
+    roles:
+      - bind

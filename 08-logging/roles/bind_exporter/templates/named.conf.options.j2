@@ -1,0 +1,25 @@
+acl nets {
+  {% for ip in localnets %}
+    {{ ip }};
+  {% endfor %}
+};
+options {
+	directory "/var/cache/bind";
+
+	forwarders {
+{% for ip in forwarders%}
+    {{ ip }};
+{% endfor %}
+	};
+
+	dnssec-validation no;
+  allow-query {
+    nets;
+  };
+	auth-nxdomain no;    # conform to RFC1035
+
+};
+
+statistics-channels {
+  inet 127.0.0.1 port 8053 allow { 127.0.0.1; };
+};

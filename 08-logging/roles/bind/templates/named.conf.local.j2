@@ -1,0 +1,14 @@
+zone "skaldr.io" {
+{% if dns_role == "master" %}
+	type master;
+	file "/etc/bind/db.skaldr";
+  allow-transfer {192.168.42.59;};
+	notify yes;
+{% else %}
+  type slave;
+  file "/var/lib/bind/db.skaldr";
+  masters {
+    {{ master_ip }};
+  };
+{% endif %}
+};

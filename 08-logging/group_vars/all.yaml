@@ -32,15 +32,9 @@ records:
         address: vm01.skaldr.io.
       - name: skaldr.io.
         address: vm02.skaldr.io.
-      - name: skaldr.io.
-        address: influxdb.skaldr.io.
   - type: A
     entries:
       - name: vm01.skaldr.io.
         address: 192.168.42.59
       - name: vm02.skaldr.io.
         address: 192.168.42.118
-      - name: skaldr.io.
-        address: 192.168.42.59
-pinger_username: pinger
-pinger_group: admin

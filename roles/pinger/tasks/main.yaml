@@ -1,0 +1,45 @@
+- name: make sure user pinger exists
+  become: yes
+  user:
+    name: "{{ pinger_username }}"
+    group: "{{ pinger_group }}"
+
+- name: copy pinger.sh
+  become: yes
+  template:
+    src: pinger.sh
+    dest: /usr/local/bin/pinger.sh
+    owner: "{{ pinger_username }}"
+    group: "{{ pinger_group }}"
+    mode: '0755'
+
+- name: create repo for pinger.conf
+  become: yes
+  file:
+    path: /etc/pinger
+    state: directory
+    mode: '0755'
+
+- name: copy pinger.conf
+  become: yes
+  template:
+    src: pinger.conf
+    dest: /etc/pinger/pinger.conf
+    owner: "{{ pinger_username }}"
+    group: "{{ pinger_group }}"
+    mode: '0755'
+
+- name: make pinger service
+  become: yes
+  template:
+    src: pinger.service.j2
+    dest: /etc/systemd/system/pinger.service
+  notify:
+    - daemon reload
+    - restart pinger
+    - hash
+
+- name: start pinger service
+  service:
+    name: pinger
+    state: started
