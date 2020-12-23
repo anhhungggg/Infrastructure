@@ -1,0 +1,16 @@
+---
+  - name: setup
+    hosts: vm02
+    become: yes
+    roles:
+      - nginx
+      - mysql
+      - uwsgi
+      - agama
+      # - bind
+      # - mysql_exporter
+      # - node_exporter
+      # - nginx_exporter
+      # - bind_exporter
+      # - prometheus
+      # - grafana

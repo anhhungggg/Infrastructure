@@ -1,6 +1,16 @@
 ---
-  - name: logging play
-    hosts: vm02
+  - name: vm01 play
+    hosts: all
     become: yes
     roles:
+      - nginx
+      - uwsgi
+      - mysql
+      - agama
       - bind
+      - node_exporter
+      - prometheus
+      - bind_exporter
+      - nginx_exporter
+      - mysql_exporter
+      - grafana

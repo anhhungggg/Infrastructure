@@ -3,8 +3,17 @@
   apt:
     name: nginx
     state: present
+    update_cache: yes
 - name: add custom html file
   become: yes
   copy:
     src: ./files/index.html
     dest: /var/www/html
+
+# - name: No default nginx
+#   become: yes
+#   file:
+#     path: /etc/nginx/sites-enabled/default
+#     state: absent
+#   notify:
+#     - Restart nginx

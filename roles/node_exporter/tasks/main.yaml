@@ -4,21 +4,4 @@
   apt:
     name:
       - prometheus-node-exporter
-      - nginx
     update_cache: yes
-
-- name: No default nginx
-  become: yes
-  file:
-    path: /etc/nginx/sites-enabled/default
-    state: absent
-  notify:
-    - Restart nginx
-
-# - name: Nginx config
-#   become: yes
-#   template:
-#     src: node_exporter.conf
-#     dest: /etc/nginx/sites-enabled/node_exporter.conf
-#   notify:
-#     - Restart nginx
