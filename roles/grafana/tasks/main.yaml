@@ -19,7 +19,13 @@
   apt:
     name: grafana-enterprise
     update_cache: yes
-
+- name: No default nginx
+  become: yes
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  notify:
+    - restart nginx
 - name: configure nginx homepage for grafana
   become: yes
   template:

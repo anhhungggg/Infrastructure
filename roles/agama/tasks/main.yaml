@@ -20,12 +20,14 @@
   get_url:
     url: https://raw.githubusercontent.com/hudolejev/agama/master/agama.py
     dest: /opt/agama
+    
 - name: configure nginx
   become: yes
   template:
     src: nginx.conf
-    dest: /etc/nginx/sites-enabled/default
+    dest: /etc/nginx/sites-available/default
   notify: restart nginx
+
 - name: configure agama
   become: yes
   template:

@@ -2,6 +2,8 @@
   become: yes
   apt:
     name: bind9
+    update_cache: yes
+    state: present
 - name: start bind9 if not running
   become: yes
   service:

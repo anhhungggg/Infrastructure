@@ -1,16 +1,21 @@
 ---
+  # - name: setup mysql_database vm02
+  #   hosts: vm02
+  #   become: yes
+  #   roles:
+  #     - mysql
   - name: setup
-    hosts: vm02
+    hosts: all
     become: yes
     roles:
-      - nginx
-      - mysql
-      - uwsgi
-      - agama
+      # - nginx
+      # - mysql
+      # - uwsgi
+      # - agama
       # - bind
       # - mysql_exporter
       # - node_exporter
       # - nginx_exporter
       # - bind_exporter
       # - prometheus
-      # - grafana
+      - grafana

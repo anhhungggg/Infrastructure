@@ -1,4 +1,4 @@
-mysql_host: 192.168.42.109
+mysql_host: 192.168.42.120
 mysql_database: agama
 mysql_user: agama
 mysql_password: !vault |
@@ -37,10 +37,12 @@ records:
   - type: A
     entries:
       - name: vm01.skaldr.io.
-        address: 192.168.42.123
+        address: 192.168.42.136
       - name: vm02.skaldr.io.
-        address: 192.168.42.28
-      - name: skaldr.io.
-        address: 192.168.42.123
+        address: 192.168.42.120
+      - name: influxdb.skaldr.io.
+        address: 192.168.42.136
+slave_internal_ip: 192.168.42.120
+grafana_port: 13680
 pinger_username: pinger
 pinger_group: admin

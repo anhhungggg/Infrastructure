@@ -1,8 +1,8 @@
-# - name: make sure nginx is installed
-#   become: yes
-#   apt:
-#     name: nginx
-#     state: present
+- name: make sure nginx is installed
+  become: yes
+  apt:
+    name: nginx
+    state: present
 
 - name: open endpoint for stub_status
   become: yes

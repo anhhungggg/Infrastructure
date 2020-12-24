@@ -1,5 +1,5 @@
-vm01 ansible_host=193.40.156.86 ansible_port=7522 ansible_ssh_user=ubuntu ansible_python_interpreter=python3
-vm02 ansible_host=193.40.156.86 ansible_port=10922 ansible_ssh_user=ubuntu ansible_python_interpreter=python3
+vm01 ansible_host=193.40.156.86 ansible_port=13622 ansible_ssh_user=ubuntu ansible_python_interpreter=python3
+vm02 ansible_host=193.40.156.86 ansible_port=12022 ansible_ssh_user=ubuntu ansible_python_interpreter=python3
 
 [web_servers]
 vm01
@@ -18,3 +18,6 @@ vm02
 
 [prometheus]
 vm02
+
+[grafana]
+vm01
