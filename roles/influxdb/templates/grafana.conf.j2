@@ -1,36 +1,36 @@
- server {
-  server_name {% if dns_role == "master" %}vm01.skaldr.io{% else %}vm02.skaldr.io{% endif %};
-  listen 80;
-  root /usr/share/nginx/www;
-  index index.html index.htm;
+server {
+ listen 80 default_server;
+ root /usr/share/nginx/www;
+ index index.html index.htm;
 
-  location /grafana/ {
-   proxy_pass http://localhost:3000/;
-  }
+{% if inventory_hostname in groups['grafana'] %}
+ location /grafana {
+   proxy_pass http://localhost:3000;
+ }
+{% endif %}
+ location /bind-metrics {
+   proxy_pass http://localhost:9119/metrics;
+ }
 
-  location /bind-metrics {
-    proxy_pass http://localhost:9119/metrics;
-  }
+ location /mysql-metrics {
+   proxy_pass http://localhost:9104/metrics;
+ }
 
-  location /mysql-metrics {
-    proxy_pass http://localhost:9104/metrics;
-  }
+ location /nginx-metrics {
+   proxy_pass http://{% if inventory_hostname == 'vm01' -%}{{vm01_internal_ip}}{% else -%}{{vm02_internal_ip}}{% endif -%}:9113/metrics;
+ }
+ location /metrics {
+             proxy_pass http://127.0.0.1:9100/metrics;
 
-  location /nginx-metrics {
-    proxy_pass http://localhost:9113/metrics;
-  }
-  location /metrics {
-              proxy_pass http://127.0.0.1:9100/metrics;
+ }
+ location /prometheus {
+         proxy_pass http://vm02.skaldr.io:9090;
+ }
 
-  }
-  location /prometheus {
-          proxy_pass http://vm02.skaldr.io:9090;
-  }
-
-  location / {
-		uwsgi_pass localhost:5000;
-		include uwsgi_params;
-	}
+ location / {
+   uwsgi_pass localhost:5000;
+   include uwsgi_params;
+ }
 }
 
 server {

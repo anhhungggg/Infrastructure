@@ -12,10 +12,29 @@
     update_cache: yes
     state: present
 
+- name: package telegraf
+  become: yes
+  get_url:
+    url: https://dl.influxdata.com/telegraf/releases/telegraf_1.17.0-1_amd64.deb
+    dest: /opt/telegraf_1.17.0-1_amd64.deb
+
+- name: install telegraf package
+  become: yes
+  apt:
+    deb: /opt/telegraf_1.17.0-1_amd64.deb
+
+- name: config telegraf
+  become: yes
+  template:
+    src: telegraf.conf.j2
+    dest: /etc/telegraf/telegraf.conf
+  notify:
+    - restart telegraf
+
 - name: setup reverse proxy for influxdb
   become: yes
   template:
     src: grafana.conf.j2
-    dest: /etc/nginx/sites-enabled/grafana.conf
+    dest: /etc/nginx/sites-available/grafana.conf
   notify:
     - restart nginx

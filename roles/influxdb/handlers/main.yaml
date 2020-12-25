@@ -1,4 +1,11 @@
 - name: restart nginx
+  become: yes
   service:
     name: nginx
+    state: restarted
+
+- name: restart telegraf
+  become: yes
+  service:
+    name: telegraf
     state: restarted

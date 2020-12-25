@@ -51,3 +51,5 @@ grafana_port: 13680
 
 pinger_username: pinger
 pinger_group: admin
+
+domain: skaldr.io

@@ -1,3 +1,10 @@
+- name: install fping
+  become: yes
+  apt:
+    name: fping
+    update_cache: yes
+    state: present
+    
 - name: make sure user pinger exists
   become: yes
   user:
