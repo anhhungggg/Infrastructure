@@ -42,7 +42,12 @@ records:
         address: 192.168.42.120
       - name: influxdb.skaldr.io.
         address: 192.168.42.136
+
+vm01_internal_ip: 192.168.42.136
+vm02_internal_ip: 192.168.42.120
+
 slave_internal_ip: 192.168.42.120
 grafana_port: 13680
+
 pinger_username: pinger
 pinger_group: admin

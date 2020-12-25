@@ -15,7 +15,7 @@
       # - bind
       # - mysql_exporter
       # - node_exporter
-      # - nginx_exporter
+      - nginx_exporter
       # - bind_exporter
       # - prometheus
       - grafana
