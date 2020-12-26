@@ -19,6 +19,7 @@
       # - bind_exporter
       # - prometheus
       # - grafana
-      - influxdb
+      # - influxdb
       # - pinger
       # - rsyslog
+      - backup

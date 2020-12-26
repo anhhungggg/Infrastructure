@@ -1,0 +1,47 @@
+- name: create user backup
+  become: yes
+  user:
+    name: backup
+    home: /home/backup
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
+    ssh_key_file: /home/backup/.ssh/id_rsa
+
+- name: add user backup to group Grafana
+  become: yes
+  user:
+    name: backup
+    groups: grafana,prometheus
+    append: yes
+
+- name: create mysql user for backup
+  become: yes
+  mysql_user:
+    name: "{{ backup_mysql_username }}"
+    password: "{{ backup_mysql_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    priv: "{{ mysql_database }}.*:ALL"
+    host: "%"
+
+- name: copy mysql cnf file for backup user
+  become: yes
+  template:
+    src: .my.cnf.j2
+    dest: /home/backup/.my.cnf
+    owner: backup
+    group: backup
+    mode: u+rw,g-rw,o-rw
+
+- name: create backup location
+  become: yes
+  file:
+    path: /home/backup/backup
+    state: directory
+    mode: '0755'
+
+- name: create restore location
+  become: yes
+  file:
+    path: /home/backup/restore
+    state: directory
+    mode: '0755'

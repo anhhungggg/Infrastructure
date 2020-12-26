@@ -1,5 +1,5 @@
 ---
-  - name: vm01 play
+  - name: logging
     hosts: all
     become: yes
     roles:
@@ -14,3 +14,6 @@
       - nginx_exporter
       - mysql_exporter
       - grafana
+      - pinger
+      - influxdb
+      - rsyslog
