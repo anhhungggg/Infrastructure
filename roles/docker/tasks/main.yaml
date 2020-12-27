@@ -1,0 +1,20 @@
+---
+  - name: install docker.io
+    become: yes
+    apt:
+      name: docker.io
+      update_cache: yes
+
+  - name: install additional package
+    become: yes
+    apt:
+      name: python3-docker
+      update_cache: yes
+
+  - name: enable docker on system boot
+    become: yes
+    service:
+      name: docker
+      enabled: yes
+    tags:
+      - docker-check

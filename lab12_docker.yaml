@@ -1,0 +1,6 @@
+- name: setup
+  hosts: vm01
+  become: yes
+  roles:
+    # - docker
+    - grafana_docker
