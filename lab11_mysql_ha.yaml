@@ -1,0 +1,8 @@
+---
+  - name: ha
+    become: yes
+    hosts: db_servers
+    roles:
+      - mysql
+      - mysql_exporter
+      - agama

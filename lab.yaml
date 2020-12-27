@@ -9,7 +9,7 @@
     become: yes
     roles:
       # - nginx
-      # - mysql
+      - mysql
       # - uwsgi
       # - agama
       # - bind
@@ -22,4 +22,4 @@
       # - influxdb
       # - pinger
       # - rsyslog
-      - backup
+      # - backup

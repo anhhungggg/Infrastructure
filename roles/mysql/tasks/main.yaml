@@ -9,11 +9,12 @@
 
 - name: configure mysql
   become: yes
-  copy:
-    src: ./files/override.cnf
+  template:
+    src: override.cnf.j2
     dest: /etc/mysql/mysql.conf.d/override.cnf
   notify: restart mysql
-
+  tags:
+    - update_cnf
 - name: create mysql database
   become: yes
   mysql_db:
@@ -28,3 +29,15 @@
     login_unix_socket: /var/run/mysqld/mysqld.sock
     priv: "{{ mysql_database }}.*:ALL"
     host: "%"
+
+- name: create replication user
+  become: yes
+  mysql_user:
+    name: replication
+    password: "{{ replication_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    priv: "*.*:REPLICATION SLAVE"
+    host: "%"
+    state: present
+  tags:
+    - replication

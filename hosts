@@ -9,6 +9,7 @@ vm01
 
 [db_servers]
 vm02
+vm01
 
 [master]
 vm01

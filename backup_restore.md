@@ -5,6 +5,13 @@ Install and configure with Ansible:
 ansible-playbook lab02_web_server.yaml
 ~~~
 
+MySQL
+---
+Install and configure with Ansible:
+~~~
+ansible-playbook lab04_web_app.yaml --tags "mysql"
+~~~
+
 AGAMA
 -----
 Install and configure with Ansible:

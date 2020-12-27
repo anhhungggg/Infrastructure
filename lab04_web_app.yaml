@@ -2,7 +2,8 @@
   - name: Database server
     hosts: db_servers
     roles:
-      - mysql
+      - role: mysql
+        tags: mysql
   - name: App server
     hosts: app_servers
     roles:
