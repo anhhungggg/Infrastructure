@@ -1,5 +1,5 @@
 duplicity --no-encryption full /home/backup/backup/ rsync://anhhungggg@backup.skaldr.io//home/anhhungggg/
-
+duplicity --no-encryption incremental /home/backup/backup/ rsync://anhhungggg@backup.skaldr.io//home/anhhungggg/
 
 duplicity --no-encryption restore rsync://anhhungggg@backup.skaldr.io//home/anhhungggg/ /home/backup/restore/
 
