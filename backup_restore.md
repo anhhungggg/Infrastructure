@@ -13,7 +13,7 @@ ansible-playbook lab03_web_app.yaml
 ~~~
 Restore the data from the backup:
 ~~~
-su - backup duplicity --no-encryption restore rsync://anhhungggg@backup.skaldr.io//home/anhhungggg/ /home/backup/restore/
+su - backup duplicity --no-encryption restore rsync://<github_user>@backup.skaldr.io//home/<github_user>/ /home/backup/restore/
 su - backup mysql agama < /home/backup/restore/agama.sql
 ~~~
 
@@ -40,7 +40,7 @@ ansible-playbook lab07_grafana.yaml
 ~~~
 Restore the data from the backup:
 ~~~
-su - backup duplicity --no-encryption restore rsync://anhhungggg@backup.skaldr.io//home/anhhungggg/ /home/backup/restore/
+su - backup duplicity --no-encryption restore rsync://<github_user>@backup.skaldr.io//home/<github_user>/ /home/backup/restore/
 su - backup cp -a /home/backup/backup/grafana/* /var/lib/grafana/
 ~~~
 
@@ -74,12 +74,12 @@ ansible-playbook lam08_logging.yaml (optional: --tags "influxdb" not included te
 ~~~
 Restore the data from the backup:
 ~~~
-su - backup duplicity --no-encryption restore rsync://anhhungggg@backup.skaldr.io//home/anhhungggg/ /home/backup/restore/
+su - backup duplicity --no-encryption restore rsync://<github_user>@backup.skaldr.io//home/<github_user>/ /home/backup/restore/
 su - backup cp -a /home/backup/restore/influxdb/* /var/lib/influxdb/
 ~~~
 
 For latest restore point:
 ---
 ~~~
-su - backup duplicity --force --no-encryption restore rsync://anhhungggg@backup.skaldr.io//home/anhhungggg/ /home/backup/restore/
+su - backup duplicity --force --no-encryption restore rsync://<github_user>@backup.skaldr.io//home/<github_user>/ /home/backup/restore/
 ~~~
