@@ -17,11 +17,15 @@
   get_url:
     url: https://dl.influxdata.com/telegraf/releases/telegraf_1.17.0-1_amd64.deb
     dest: /opt/telegraf_1.17.0-1_amd64.deb
+  tags:
+    - telegraf
 
 - name: install telegraf package
   become: yes
   apt:
     deb: /opt/telegraf_1.17.0-1_amd64.deb
+  tags:
+    - telegraf
 
 - name: config telegraf
   become: yes
@@ -30,7 +34,9 @@
     dest: /etc/telegraf/telegraf.conf
   notify:
     - restart telegraf
-
+  tags:
+    - telegraf
+    
 - name: setup reverse proxy for influxdb
   become: yes
   template:

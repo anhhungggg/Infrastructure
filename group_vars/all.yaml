@@ -63,5 +63,5 @@ pinger_username: pinger
 pinger_group: admin
 
 domain: skaldr.io
-
+github_user: anhhungggg
 backup_server_ip_address: 192.168.42.156

@@ -7,11 +7,11 @@
     ssh_key_bits: 2048
     ssh_key_file: /home/backup/.ssh/id_rsa
 
-- name: add user backup to group Grafana
+- name: add user backup to groups
   become: yes
   user:
     name: backup
-    groups: grafana,prometheus
+    groups: grafana,prometheus,influxdb
     append: yes
 
 - name: create mysql user for backup
@@ -37,6 +37,7 @@
   file:
     path: /home/backup/backup
     state: directory
+    owner: backup
     mode: '0755'
 
 - name: create restore location
@@ -44,4 +45,37 @@
   file:
     path: /home/backup/restore
     state: directory
+    owner: backup
     mode: '0755'
+
+- name: install duplicity
+  become: yes
+  apt:
+    name: duplicity
+    update_cache: yes
+
+- name: chmode influxdb files
+  become: yes
+  file:
+    path: /var/lib/influxdb/
+    state: directory
+    recurse: yes
+    mode: g+rwx
+  tags:
+    - backup_chmode
+
+- name: chmode grafana files
+  become: yes
+  file:
+    path: /var/lib/grafana/
+    state: directory
+    recurse: yes
+    mode: g+rwx
+  tags:
+    - backup_chmode
+
+- name: update crontab
+  become: yes
+  template:
+    src: backup.cron.j2
+    dest: /etc/cron.d/backup
