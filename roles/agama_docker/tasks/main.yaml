@@ -1,0 +1,38 @@
+---
+  - name: create agama directory
+    become: yes
+    file:
+      path: /opt/agama
+      state: directory
+
+  - name: get agama docker file
+    become: yes
+    get_url:
+      url: https://raw.githubusercontent.com/hudolejev/agama/master/Dockerfile
+      dest: /opt/agama
+
+  - name: setup docker image
+    become: yes
+    docker_image:
+      name: agama
+      source: build
+      build:
+        path: /opt/agama
+
+  - name: setup docker container
+    become: yes
+    docker_container:
+      name: agama
+      image: "agama"
+      published_ports:
+        - "{{ agama_docker_port }}:8000"
+      env:
+        AGAMA_DATABASE_URI: mysql://{{ mysql_user }}:{{ mysql_password }}@{{ mysql_host }}/{{ mysql_database }}
+
+  - name: update reverse proxy
+    become: yes
+    template:
+      src: grafana.conf.j2
+      dest: /etc/nginx/sites-available/grafana.conf
+    notify:
+      - restart nginx

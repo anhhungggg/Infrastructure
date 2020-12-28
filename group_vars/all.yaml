@@ -1,4 +1,4 @@
-mysql_host: 192.168.42.120
+mysql_host: 192.168.42.71
 mysql_database: agama
 mysql_user: agama
 mysql_password: !vault |
@@ -40,6 +40,7 @@ forwarders:
 localnets:
   - 192.168.42.0/24
   - 127.0.0.0/8
+  - 172.17.0.0/16
 records:
   - type: NS
     entries:
@@ -52,19 +53,19 @@ records:
   - type: A
     entries:
       - name: vm01.skaldr.io.
-        address: 192.168.42.136
+        address: 192.168.42.124
       - name: vm02.skaldr.io.
-        address: 192.168.42.120
+        address: 192.168.42.71
       - name: influxdb.skaldr.io.
-        address: 192.168.42.136
+        address: 192.168.42.124
       - name: backup.skaldr.io.
         address: 192.168.42.156
 
-vm01_internal_ip: 192.168.42.136
-vm02_internal_ip: 192.168.42.120
+vm01_internal_ip: 192.168.42.124
+vm02_internal_ip: 192.168.42.71
 
-slave_internal_ip: 192.168.42.120
-grafana_port: 13680
+slave_internal_ip: 192.168.42.71
+grafana_port: 12480
 
 pinger_username: pinger
 pinger_group: admin
@@ -74,3 +75,4 @@ github_user: anhhungggg
 backup_server_ip_address: 192.168.42.156
 
 grafana_docker_port: 3001
+agama_docker_port: 8001

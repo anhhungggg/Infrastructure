@@ -5,11 +5,11 @@
   #   roles:
   #     - mysql
   - name: setup
-    hosts: all
+    hosts: vm02
     become: yes
     roles:
       # - nginx
-      - mysql
+      # - mysql
       # - uwsgi
       # - agama
       # - bind
@@ -23,3 +23,6 @@
       # - pinger
       # - rsyslog
       # - backup
+      # - docker
+      # - grafana_docker
+      - agama_docker

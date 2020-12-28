@@ -2,7 +2,7 @@ zone "skaldr.io" {
 {% if dns_role == "master" %}
 	type master;
 	file "/etc/bind/db.skaldr";
-  allow-transfer {192.168.42.120;};
+  allow-transfer {192.168.42.71;};
 	notify yes;
 {% else %}
   type slave;

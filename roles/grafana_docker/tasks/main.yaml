@@ -11,7 +11,7 @@
   - name: create container
     become: yes
     docker_container:
-      name: grafana-server
+      name: grafana
       image: "grafana/grafana"
       volumes:
         - /opt/docker/grafana:/var/lib/grafana
@@ -20,6 +20,8 @@
       env:
         GF_SERVER_ROOT_URL: "http://localhost:{{ grafana_docker_port }}/grafana"
         GF_SERVER_SERVE_FROM_SUB_PATH: "true"
+      dns_servers:
+        - "192.168.42.124"
 
   - name: update reverse proxy for garfana_docker
     become: yes
