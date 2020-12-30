@@ -47,9 +47,11 @@ ansible-playbook lab07_grafana.yaml
 ~~~
 Restore the data from the backup:
 ~~~
-su - backup duplicity --no-encryption restore rsync://<github_user>@backup.skaldr.io//home/<github_user>/ /home/backup/restore/
+su - backup duplicity --force --no-encryption restore rsync://anhhungggg@backup.skaldr.io//home/anhhungggg/ /home/backup/restore/
 su - backup cp -a /home/backup/backup/grafana/* /var/lib/grafana/
 ~~~
+
+
 
 Exporters
 ---

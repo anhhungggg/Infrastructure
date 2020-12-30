@@ -1,3 +1,10 @@
+- name: make sure bind installed
+  become: yes
+  apt:
+    name: bind9
+    update_cache: yes
+    state: present
+    
 - name: make sure dedicated_exporter_group exists
   become: yes
   group:

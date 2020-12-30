@@ -12,7 +12,6 @@ ExecStart=/opt/nginx_exporter/nginx-prometheus-exporter \
     -nginx.scrape-uri http://127.0.0.1:8080/stub_status
 
 SyslogIdentifier=nginx_prometheus_exporter
-Restart=always
 
 [Install]
 WantedBy=multi-user.target

@@ -1,0 +1,7 @@
+- name: fix resolv.conf
+  become: yes
+  template:
+    src: resolv.conf
+    dest: /etc/resolv.conf
+  # notify:
+  #   - stop systemd-resolved

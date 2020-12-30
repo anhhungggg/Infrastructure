@@ -1,3 +1,3 @@
 ---
 dns_role: slave
-master_ip: 192.168.42.124
+master_ip: 192.168.42.118

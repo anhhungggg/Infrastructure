@@ -5,7 +5,7 @@ server {
 
 {% if inventory_hostname in groups['grafana'] %}
  location /grafana {
-   proxy_pass http://localhost:3000;
+   proxy_pass http://localhost:{{ grafana_docker_port }};
  }
 {% endif %}
  location /bind-metrics {
@@ -28,14 +28,6 @@ server {
  }
 
  location / {
-   uwsgi_pass localhost:5000;
-   include uwsgi_params;
- }
-}
-
-server {
-  server_name influxdb.skaldr.io;
-  location / {
-    proxy_pass http://localhost:8086;
+   proxy_pass http://localhost:{{ agama_docker_port }};
   }
 }

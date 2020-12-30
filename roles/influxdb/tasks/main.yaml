@@ -36,7 +36,7 @@
     - restart telegraf
   tags:
     - telegraf
-    
+
 - name: setup reverse proxy for influxdb
   become: yes
   template:
@@ -44,3 +44,5 @@
     dest: /etc/nginx/sites-available/grafana.conf
   notify:
     - restart nginx
+  tags:
+    - setup_reverse_proxy

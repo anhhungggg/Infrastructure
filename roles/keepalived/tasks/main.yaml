@@ -1,0 +1,69 @@
+---
+- name: install keepalived
+  become: yes
+  apt:
+    name: keepalived
+
+- name: config keepalived
+  become: yes
+  template:
+    src: keepalived.conf
+    dest: /etc/keepalived/keepalived.conf
+  notify:
+    - restart keepalived
+- name: make sure keepalived running
+  become: yes
+  service:
+    name: keepalived
+    state: started
+
+- name: make sure dedicated group existed
+  become: yes
+  group:
+    name: "{{dedicated_exporter_group}}"
+    state: present
+    system: yes
+
+- name: make sure dedicated user existed
+  become: yes
+  user:
+    name: "{{dedicated_exporter_user}}"
+    group: "{{dedicated_exporter_group}}"
+    shell: /sbin/nologin
+
+- name: download keepalived exporter
+  become: yes
+  get_url:
+    url: https://github.com/cafebazaar/keepalived-exporter/releases/download/v1.1.0/keepalived-exporter-1.1.0.linux-amd64.tar.gz
+    dest: /opt/
+
+- name: create repo
+  become: yes
+  file:
+    path: /opt/keepalived-exporter
+    state: directory
+    mode: '0755'
+
+- name: untar
+  become: yes
+  unarchive:
+    src: /opt/keepalived-exporter-1.1.0.linux-amd64.tar.gz
+    dest: /opt/keepalived-exporter/
+    remote_src: yes
+
+- name: systemd keepalived_exporter
+  become: yes
+  template:
+    src: keepalived_exporter.service.j2
+    dest: /etc/systemd/system/keepalived_exporter.service
+  notify:
+    - daemon-reload
+    - restart keepalived_exporter
+
+- name: update reverse proxy
+  become: yes
+  template:
+    src: grafana.conf.j2
+    dest: /etc/nginx/sites-available/grafana.conf
+  notify:
+    - restart nginx

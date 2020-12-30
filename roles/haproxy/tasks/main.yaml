@@ -1,0 +1,30 @@
+---
+- name: install haproxy
+  apt:
+    name: haproxy
+
+- name: config haproxy
+  template:
+    src: haproxy.cfg
+    dest: /etc/haproxy/haproxy.cfg
+  notify:
+    - restart haproxy
+- name: make sure docker running
+  service:
+    name: docker
+    state: started
+
+- name: install haproxy exporter
+  docker_container:
+    name: haproxy_exporter
+    image: quay.io/prometheus/haproxy-exporter:v0.12.0
+    ports:
+      - 9101:9101
+    command: --haproxy.scrape-uri="http://172.17.0.1:88/haproxy?stats;csv"
+
+- name: update reverse proxy
+  template:
+    src: grafana.conf.j2
+    dest: /etc/nginx/sites-available/grafana.conf
+  notify:
+    - restart nginx

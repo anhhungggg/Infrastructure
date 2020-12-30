@@ -28,14 +28,6 @@ server {
  }
 
  location / {
-   uwsgi_pass localhost:5000;
-   include uwsgi_params;
- }
+   proxy_pass http://localhost:{{ agama_docker_port }};
+  }
 }
-
-#server {
-#  server_name influxdb.skaldr.io;
-#  location / {
-#    proxy_pass http://localhost:8086;
-#  }
-#}

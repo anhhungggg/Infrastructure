@@ -1,0 +1,6 @@
+---
+  - name: debug playbook
+    hosts: all
+    tasks:
+      - debug:
+          var: hostvars

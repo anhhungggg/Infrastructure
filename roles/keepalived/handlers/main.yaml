@@ -1,0 +1,21 @@
+- name: restart keepalived
+  become: yes
+  service:
+    name: keepalived
+    state: restarted
+
+- name: restart keepalived_exporter
+  become: yes
+  service:
+    name: keepalived_exporter
+    state: restarted
+
+- name: daemon-reload
+  become: yes
+  shell: systemctl daemon-reload
+
+- name: restart nginx
+  become: yes
+  service:
+    name: nginx
+    state: restarted

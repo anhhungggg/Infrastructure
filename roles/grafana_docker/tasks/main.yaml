@@ -20,8 +20,6 @@
       env:
         GF_SERVER_ROOT_URL: "http://localhost:{{ grafana_docker_port }}/grafana"
         GF_SERVER_SERVE_FROM_SUB_PATH: "true"
-      dns_servers:
-        - "192.168.42.124"
 
   - name: update reverse proxy for garfana_docker
     become: yes

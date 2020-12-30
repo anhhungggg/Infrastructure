@@ -2,8 +2,9 @@
   become: yes
   apt:
     name: bind9
-    update_cache: yes
     state: present
+    update_cache: yes
+
 - name: start bind9 if not running
   become: yes
   service:
@@ -22,7 +23,7 @@
 - name: config bind local
   become: yes
   template:
-    src: named.conf.local.j2
+    src: named2.conf.local.j2
     dest: /etc/bind/named.conf.local
   notify:
   - restart bind
@@ -36,8 +37,10 @@
   notify:
   - bind reload db
 
-- name: fix resolv.conf
-  become: yes
-  template:
-    src: resolv.conf
-    dest: /etc/resolv.conf
+# - name: fix resolv.conf
+#   become: yes
+#   template:
+#     src: resolv.conf
+#     dest: /etc/resolv.conf
+#   tags:
+#     - slave

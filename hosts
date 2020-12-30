@@ -1,5 +1,5 @@
-vm01 ansible_host=193.40.156.86 ansible_port=12422 ansible_ssh_user=ubuntu ansible_python_interpreter=python3
-vm02 ansible_host=193.40.156.86 ansible_port=7122 ansible_ssh_user=ubuntu ansible_python_interpreter=python3
+vm01 ansible_host=193.40.156.86 ansible_port=11822 ansible_ssh_user=ubuntu ansible_python_interpreter=python3
+vm02 ansible_host=193.40.156.86 ansible_port=4022 ansible_ssh_user=ubuntu ansible_python_interpreter=python3
 
 [web_servers]
 vm01
@@ -13,6 +13,9 @@ vm02
 vm02
 vm01
 
+[dns_servers]
+vm01
+
 [master]
 vm01
 
@@ -24,3 +27,15 @@ vm02
 
 [grafana]
 vm01
+
+[telegraf]
+vm01
+vm02
+
+[influxdb]
+vm01
+vm02
+
+[haproxy]
+vm01
+vm02

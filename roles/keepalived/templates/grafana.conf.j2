@@ -30,4 +30,12 @@ server {
  location / {
    proxy_pass http://localhost:{{ agama_docker_port }};
   }
+
+  location /haproxy-metrics {
+    proxy_pass http://localhost:9101/metrics;
+  }
+
+  location /keepalived-metrics {
+    proxy_pass http://localhost:9165/metrics;
+  }
 }
