@@ -3,6 +3,17 @@ acl nets {
     {{ ip }};
   {% endfor %}
 };
+
+key "dns_transfer" {
+	algorithm hmac-sha256;
+	secret "{{ dns_transfer_secret }}";
+};
+
+key "dns_update" {
+	algorithm hmac-sha256;
+	secret "{{ dns_update_secret }}";
+};
+
 options {
 	directory "/var/cache/bind";
 
