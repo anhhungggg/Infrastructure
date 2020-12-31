@@ -4,7 +4,7 @@
     name: bind9
     update_cache: yes
     state: present
-    
+
 - name: make sure dedicated_exporter_group exists
   become: yes
   group:
@@ -69,13 +69,6 @@
     mode: u=rwx,g=rx,o=rx
     remote_src: yes
 
-# - name: configure statistic channel
-#   become: yes
-#   template:
-#     src: named.conf.options.j2
-#     dest: /etc/bind/named.conf.options
-#   notify:
-#     - restart bind9
 - name: make bind_exporter service
   become: yes
   template:

@@ -1,0 +1,12 @@
+- name: make sure docker running
+  service:
+    name: docker
+    state: started
+
+- name: install nginx_exporter
+  docker_container:
+    name: nginx_exporter
+    image: nginx/nginx-prometheus-exporter:0.8.0
+    ports:
+      - 9113:9113
+    command: -nginx.scrape-uri http://localhost:8080/stub_status

@@ -1,1 +1,1 @@
-ARGS="--web.external-url=http://vm02.skaldr.io/prometheus"
+ARGS="--web.external-url=http://vm01.skaldr.io/prometheus"

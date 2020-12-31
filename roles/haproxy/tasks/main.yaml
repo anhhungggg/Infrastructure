@@ -21,10 +21,10 @@
     ports:
       - 9101:9101
     command: --haproxy.scrape-uri="http://172.17.0.1:88/haproxy?stats;csv"
-
-- name: update reverse proxy
-  template:
-    src: grafana.conf.j2
-    dest: /etc/nginx/sites-available/grafana.conf
-  notify:
-    - restart nginx
+    restart_policy: always
+# - name: update reverse proxy
+#   template:
+#     src: grafana.conf.j2
+#     dest: /etc/nginx/sites-available/grafana.conf
+#   notify:
+#     - restart nginx

@@ -54,20 +54,7 @@
     name: python3-dnspython
     update_cache: yes
     state: present
-
-- name: update record
-  become: yes
-  nsupdate:
-    key_name: "dns_update"
-    key_secret: "{{ dns_update_secret }}"
-    key_algorithm: "hmac-sha256"
-    server: "{{ hostvars[groups['dns_masters'][0]]['ansible_default_ipv4']['address'] }}"
-    zone: "{{ domain }}"
-    record: "hello"
-    value: "192.168.1.99"
-  when: inventory_hostname in groups['dns_masters'][0]
-  tags:
-    - add_record
+# 
 # - name: fix resolv.conf
 #   become: yes
 #   template:

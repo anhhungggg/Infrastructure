@@ -8,26 +8,48 @@ server {
    proxy_pass http://localhost:{{ grafana_docker_port }};
  }
 {% endif %}
- location /bind-metrics {
-   proxy_pass http://localhost:9119/metrics;
- }
 
+{% if inventory_hostname in groups['prometheus'] %}
+ location /prometheus {
+        proxy_pass http://{{ inventory_hostname }}.skaldr.io:9090;
+}
+{% endif %}
+
+{% if inventory_hostname in groups['app_servers'] %}
+ location / {
+  proxy_pass http://localhost:{{ agama_docker_port }};
+ }
+{% endif %}
+
+{% if inventory_hostname in groups['db_servers'] %}
  location /mysql-metrics {
    proxy_pass http://localhost:9104/metrics;
  }
+{% endif %}
 
+{% if inventory_hostname in groups['dns_slaves'] %}
+ location /bind-metrics {
+  proxy_pass http://localhost:9119/metrics;
+}
+{% endif %}
+
+{% if inventory_hostname in groups['haproxy'] %}
+location /haproxy-metrics {
+  proxy_pass http://localhost:9101/metrics;
+}
+
+location /keepalived-metrics {
+  proxy_pass http://localhost:9165/metrics;
+}
+{% endif %}
+
+{% if inventory_hostname in groups['exporters'] %}
  location /nginx-metrics {
-   proxy_pass http://{% if inventory_hostname == 'vm01' -%}{{vm01_internal_ip}}{% else -%}{{vm02_internal_ip}}{% endif -%}:9113/metrics;
+   proxy_pass http://{{ inventory_hostname }}.skaldr.io:9113/metrics;
  }
+
  location /metrics {
-             proxy_pass http://127.0.0.1:9100/metrics;
-
+   proxy_pass http://localhost:9100/metrics;
  }
- location /prometheus {
-         proxy_pass http://vm02.skaldr.io:9090;
- }
-
- location / {
-   proxy_pass http://localhost:{{ agama_docker_port }};
-  }
+{% endif %}
 }

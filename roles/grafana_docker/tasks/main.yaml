@@ -20,11 +20,4 @@
       env:
         GF_SERVER_ROOT_URL: "http://localhost:{{ grafana_docker_port }}/grafana"
         GF_SERVER_SERVE_FROM_SUB_PATH: "true"
-
-  - name: update reverse proxy for garfana_docker
-    become: yes
-    template:
-      src: grafana.conf.j2
-      dest: /etc/nginx/sites-available/grafana.conf
-    notify:
-      - restart nginx
+      restart_policy: always

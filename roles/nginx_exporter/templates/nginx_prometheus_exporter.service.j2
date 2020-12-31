@@ -8,9 +8,13 @@ Type=simple
 User={{dedicated_exporter_user}}
 Group={{dedicated_exporter_group}}
 ExecStart=/opt/nginx_exporter/nginx-prometheus-exporter \
-    -web.listen-address={% if inventory_hostname == 'vm01' -%}{{vm01_internal_ip}}{% else -%}{{vm02_internal_ip}}{% endif -%}:9113 \
+    -web.listen-address={{ inventory_hostname }}.{{ domain }}:9113 \
     -nginx.scrape-uri http://127.0.0.1:8080/stub_status
 
+SuccessExitStatus=143
+TimeoutStopSec=10
+Restart=on-failure
+RestartSec=30
 SyslogIdentifier=nginx_prometheus_exporter
 
 [Install]

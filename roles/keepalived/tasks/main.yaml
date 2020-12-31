@@ -60,10 +60,16 @@
     - daemon-reload
     - restart keepalived_exporter
 
-- name: update reverse proxy
+- name: enable keepalived_exporter
   become: yes
-  template:
-    src: grafana.conf.j2
-    dest: /etc/nginx/sites-available/grafana.conf
-  notify:
-    - restart nginx
+  service:
+    name: keepalived_exporter
+    enabled: yes
+    
+# - name: update reverse proxy
+#   become: yes
+#   template:
+#     src: grafana.conf.j2
+#     dest: /etc/nginx/sites-available/grafana.conf
+#   notify:
+#     - restart nginx
