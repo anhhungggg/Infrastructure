@@ -31,6 +31,7 @@
     owner: backup
     group: backup
     mode: u+rw,g-rw,o-rw
+  when: inventory_hostname in groups['db_servers']
 
 - name: create backup location
   become: yes
@@ -63,6 +64,7 @@
     mode: g+rwx
   tags:
     - backup_chmode
+  when: inventory_hostname in groups['influxdb']
 
 - name: chmode grafana files
   become: yes
@@ -73,9 +75,18 @@
     mode: g+rwx
   tags:
     - backup_chmode
+  when: inventory_hostname in groups['grafana']
 
-- name: update crontab
+- name: update crontab for db_servers
   become: yes
   template:
     src: backup.cron.j2
     dest: /etc/cron.d/backup
+  when: inventory_hostname in groups['db_servers']
+
+- name: update crontab for monitoring servers
+  become: yes
+  template:
+    src: backup_monitoring.cron.j2
+    dest: /etc/cron.d/backup
+  when: inventory_hostname in groups['grafana']
