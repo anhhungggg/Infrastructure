@@ -11,6 +11,7 @@ The following is a summary of the infrastracture architecture:
 - Prometheus works with exporters to deliver metrics of our services.
 - Telegraf works with Influxdb for syslog.
 - Grafana has Prometheus and Influxdb as a datasource.
+- HAproxy and Keepalived for load balancing and high availability.
 
 Coverage: Included Services
 - MySQL: Database Dump, will have our wp data.
@@ -24,6 +25,7 @@ One in a cloud option, or an offsite datacenter.
 
 Coverage: Excluded Services
 - Haproxy: Provisioned with Ansible.
+- Keepalived: Provisioned with Ansible.
 - Telegraf: everything we need is already in influxdb.
 - Prometheus: Provisioned with Ansible along with exporters.
 - Bind: Provisioned with Ansible.

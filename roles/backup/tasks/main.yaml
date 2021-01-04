@@ -14,25 +14,6 @@
     groups: grafana,prometheus,influxdb
     append: yes
 
-- name: create mysql user for backup
-  become: yes
-  mysql_user:
-    name: "{{ backup_mysql_username }}"
-    password: "{{ backup_mysql_password }}"
-    login_unix_socket: /var/run/mysqld/mysqld.sock
-    priv: "{{ mysql_database }}.*:ALL"
-    host: "%"
-
-- name: copy mysql cnf file for backup user
-  become: yes
-  template:
-    src: .my.cnf.j2
-    dest: /home/backup/.my.cnf
-    owner: backup
-    group: backup
-    mode: u+rw,g-rw,o-rw
-  when: inventory_hostname in groups['db_servers']
-
 - name: create backup location
   become: yes
   file:
@@ -55,6 +36,33 @@
     name: duplicity
     update_cache: yes
 
+- name: copy mysql cnf file for backup user
+  become: yes
+  template:
+    src: .my.cnf.j2
+    dest: /home/backup/.my.cnf
+    owner: backup
+    group: backup
+    mode: u+rw,g-rw,o-rw
+  when: inventory_hostname in groups['db_servers']
+
+- name: update crontab for db_servers
+  become: yes
+  template:
+    src: backup.cron.j2
+    dest: /etc/cron.d/backup
+  when: inventory_hostname in groups['db_servers']
+  
+- name: create mysql user for backup
+  become: yes
+  mysql_user:
+    name: "{{ backup_mysql_username }}"
+    password: "{{ backup_mysql_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    priv: "{{ mysql_database }}.*:ALL"
+    host: "%"
+  when: inventory_hostname in groups['db_servers']
+
 - name: chmode influxdb files
   become: yes
   file:
@@ -76,13 +84,6 @@
   tags:
     - backup_chmode
   when: inventory_hostname in groups['grafana']
-
-- name: update crontab for db_servers
-  become: yes
-  template:
-    src: backup.cron.j2
-    dest: /etc/cron.d/backup
-  when: inventory_hostname in groups['db_servers']
 
 - name: update crontab for monitoring servers
   become: yes
