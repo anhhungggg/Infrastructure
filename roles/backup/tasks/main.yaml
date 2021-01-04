@@ -7,13 +7,6 @@
     ssh_key_bits: 2048
     ssh_key_file: /home/backup/.ssh/id_rsa
 
-- name: add user backup to groups
-  become: yes
-  user:
-    name: backup
-    groups: grafana,prometheus,influxdb
-    append: yes
-
 - name: create backup location
   become: yes
   file:
@@ -52,7 +45,7 @@
     src: backup.cron.j2
     dest: /etc/cron.d/backup
   when: inventory_hostname in groups['db_servers']
-  
+
 - name: create mysql user for backup
   become: yes
   mysql_user:
@@ -74,13 +67,21 @@
     - backup_chmode
   when: inventory_hostname in groups['influxdb']
 
+- name: add user backup to groups
+  become: yes
+  user:
+    name: backup
+    groups: influxdb
+    append: yes
+  when: inventory_hostname in groups['influxdb']
+
 - name: chmode grafana files
   become: yes
   file:
-    path: /var/lib/grafana/
+    path: /opt/docker/grafana/
     state: directory
     recurse: yes
-    mode: g+rwx
+    mode: o+rwx
   tags:
     - backup_chmode
   when: inventory_hostname in groups['grafana']

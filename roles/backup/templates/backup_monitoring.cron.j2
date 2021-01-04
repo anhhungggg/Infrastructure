@@ -1,5 +1,5 @@
 1 23 * * *    backup  cp -a /var/lib/influxdb /home/backup/backup/
-2 23 * * *    backup  cp -a /var/lib/grafana /home/backup/backup/
+2 23 * * *    backup  cp -a /opt/docker/grafana /home/backup/backup/
 10 23 * * 0    backup  duplicity --no-encryption full /home/backup/backup/ rsync://{{ github_user }}@backup.{{ domain }}//home/{{ github_user }}
 10 23 * * 1-6  backup  duplicity --no-encryption incremental /home/backup/backup/ rsync://{{ github_user }}@backup.{{ domain }}//home/{{ github_user }}
 11 0 * * 0    backup  duplicity --no-encryption remove-older-than 30D rsync://{{ github_user }}@backup.{{ domain }}//home/{{ github_user }}

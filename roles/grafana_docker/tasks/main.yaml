@@ -6,7 +6,7 @@
       state: directory
       owner: 472
       group: 472
-      mode: u+rwx,g+rx,o+rwx
+      mode: u+rwx,g+rwx,o+rwx
 
   - name: create container
     become: yes
