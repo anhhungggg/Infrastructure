@@ -18,6 +18,7 @@
       source: build
       build:
         path: /opt/agama
+        pull: yes
 
   - name: setup docker container
     become: yes

@@ -1,4 +1,4 @@
-mysql_host: 192.168.42.20
+mysql_host: vm01.skaldr.io
 mysql_database: agama
 mysql_user: agama
 mysql_password: !vault |
@@ -55,21 +55,16 @@ records:
   - type: A
     entries:
       - name: vm01.skaldr.io.
-        address: 192.168.42.44
+        address: 192.168.42.34
       - name: vm02.skaldr.io.
-        address: 192.168.42.20
+        address: 192.168.42.36
       - name: vm03.skaldr.io.
-        address: 192.168.42.85
+        address: 192.168.42.45
       - name: influxdb.skaldr.io.
-        address: 192.168.42.44
+        address: 192.168.42.34
       - name: backup.skaldr.io.
         address: 192.168.42.156
 
-vm01_internal_ip: 192.168.42.44
-vm02_internal_ip: 192.168.42.20
-vm03_internal_ip: 192.168.42.85
-
-slave_internal_ip: 192.168.42.20
 grafana_port: 12088
 
 pinger_username: pinger
