@@ -14,7 +14,7 @@ ansible-playbook infra.yaml --tags "mysql"
 
 AGAMA
 -----
-Restore the data from the backup:
+Restore the data from the backup:  
 As backup user:
 ~~~
 duplicity --no-encryption restore rsync://anhhungggg@backup.skaldr.io//home/anhhungggg/ /home/backup/restore/
@@ -42,7 +42,7 @@ ansible-playbook infra.yaml --tags "prometheus"
 
 Grafana
 ---
-Restore the data from the backup:
+Restore the data from the backup:  
 As backup user:
 ~~~
 duplicity --force --no-encryption restore rsync://anhhungggg@backup.skaldr.io//home/anhhungggg/ /home/backup/restore/
@@ -84,7 +84,7 @@ Install and configure with Ansible:
 ~~~
 ansible-playbook infra.yaml --tags "influxdb"
 ~~~
-Restore the data from the backup:
+Restore the data from the backup:  
 As backup user:
 ~~~
 duplicity --no-encryption restore rsync://anhhungggg@backup.skaldr.io//home/anhhungggg/ /home/backup/restore/
