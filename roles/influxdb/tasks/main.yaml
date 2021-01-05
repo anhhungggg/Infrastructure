@@ -12,6 +12,12 @@
     update_cache: yes
     state: present
 
+- name: make sure influxdb running
+  become: yes
+  service:
+    name: influxdb
+    state: started
+
 - name: package telegraf
   become: yes
   get_url:

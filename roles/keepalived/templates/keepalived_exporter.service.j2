@@ -5,8 +5,6 @@ After=network.target
 
 [Service]
 Type=simple
-User={{dedicated_exporter_user}}
-Group={{dedicated_exporter_group}}
 ExecStart=/opt/keepalived-exporter/keepalived-exporter-1.1.0.linux-amd64/keepalived-exporter
 
 SyslogIdentifier=keepalived_exporter
