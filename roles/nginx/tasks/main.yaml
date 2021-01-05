@@ -4,6 +4,11 @@
     name: nginx
     state: present
     update_cache: yes
+- name: make sure nginx running
+  become: yes
+  service:
+    name: nginx
+    state: started
 - name: add custom html file
   become: yes
   copy:

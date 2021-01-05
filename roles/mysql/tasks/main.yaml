@@ -6,7 +6,12 @@
       - python3-pymysql
     state: present
     update_cache: yes
-
+- name: make sure mysql running
+  become: yes
+  service:
+    name: mysql
+    state: started
+    
 - name: configure mysql
   become: yes
   template:
