@@ -1,8 +1,0 @@
-- name: restart sql_exporter
-  service:
-    name: mysql
-    state: restarted
-- name: daemon reload
-  shell: systemctl daemon-reload
-- name: hash
-  shell: hash -r

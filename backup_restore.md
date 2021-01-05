@@ -5,7 +5,7 @@ Install and configure with Ansible:
 ansible-playbook infra.yaml --tags "nginx"
 ~~~
 
-MySQL
+MySQL (include mysql_exporter)
 ---
 Install and configure with Ansible:
 ~~~
@@ -45,7 +45,7 @@ Grafana
 Restore the data from the backup:  
 As backup user:
 ~~~
-duplicity --force --no-encryption restore rsync://anhhungggg@backup.skaldr.io//home/anhhungggg/ /home/backup/restore/
+duplicity --no-encryption restore rsync://anhhungggg@backup.skaldr.io//home/anhhungggg/ /home/backup/restore/
 ~~~
 root user:
 ~~~
@@ -57,28 +57,14 @@ Install and configure with Ansible:
 ansible-playbook infra.yaml --tags "grafana"
 ~~~
 
-Exporters
+Exporters (nginx_exporter, node_exporter)
 ---
 Install and configure with Ansible:
 ~~~
 ansible-playbook infra.yaml --tags "expt"
 ~~~
 
-Telegraf
----
-Install and configure with Ansible:
-~~~
-ansible-playbook infra.yaml --tags "telegraf"
-~~~
-
-Rsyslog input for telegraf
----
-Install and configure with Ansible:
-~~~
-ansible-playbook infra.yaml --tags "rsyslog"
-~~~
-
-Influxdb
+Influxdb (include Telegraf & Rsyslog)
 ---
 Install and configure with Ansible:
 ~~~
@@ -94,14 +80,14 @@ root user:
 cp -a /home/backup/restore/influxdb/* /var/lib/influxdb/
 ~~~
 
-HAproxy
+HAproxy (include HAproxy exporter)
 ---
 Install and configure with Ansible:
 ~~~
 ansible-playbook infra.yaml --tags "haproxy"
 ~~~
 
-Keepalived
+Keepalived (include Keepalived exporter)
 ---
 Install and configure with Ansible:
 ~~~

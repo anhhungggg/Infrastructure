@@ -104,6 +104,8 @@
     - rsyslog
   tags:
     - influxdb
+    - pinger
+    - rsyslog
 
 - name: grafana (with docker)
   hosts: grafana

@@ -1,5 +1,0 @@
----
-  - name: Ansible connection test
-    hosts: my_vm
-    roles:
-      - test_connection
