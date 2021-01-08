@@ -1,9 +1,0 @@
----
-  - name: node_exporter
-    hosts: all
-    roles:
-      - node_exporter
-  - name: prometheus
-    hosts: prometheus
-    roles:
-      - prometheus

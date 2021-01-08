@@ -1,6 +1,0 @@
----
-  - name: App server
-    hosts: app_servers
-    roles:
-      - uwsgi
-      - agama

@@ -1,5 +1,0 @@
----
-  - name: dns server
-    hosts: vm01
-    roles:
-      - bind
