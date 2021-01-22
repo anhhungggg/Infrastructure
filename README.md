@@ -19,3 +19,15 @@ Logging:
 
 Backup Server:
 ...
+
+Instruction:
+
+- Ansible Installation  
+<https://docs.ansible.com/ansible/latest/installation_guide/index.html>
+- Running playbook for full deployment (navigate to the playbook directory beforehand)
+~~~
+ansible-playbook infra.yaml
+~~~
+Some useful links about Ansible vault password and ansible.cfg file  
+<https://docs.ansible.com/ansible/latest/user_guide/vault.html>  
+<https://docs.ansible.com/ansible/latest/installation_guide/intro_configuration.html>
