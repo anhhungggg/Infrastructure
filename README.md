@@ -14,8 +14,8 @@ Operating:
 Logging:
 - Exporters running as services: MySQL exporter,Bind exporter,Nginx exporter,HAproxy exporter,Node exporter,Keepalived exporter
 - Exporter metrics gathered by Prometheus
-- Syslog gathered by InfluxDb
-- Logging visualizationed by: grafana
+- Syslog gathered by InfluxDb and Telegraf
+- Logging visualizationed by: Grafana
 
 Backup Server:
 ...
@@ -28,6 +28,10 @@ Instruction:
 ~~~
 ansible-playbook infra.yaml
 ~~~
-Some useful links about Ansible vault password and ansible.cfg file  
+- Some useful links about Ansible vault password and ansible.cfg file  
 <https://docs.ansible.com/ansible/latest/user_guide/vault.html>  
 <https://docs.ansible.com/ansible/latest/installation_guide/intro_configuration.html>
+- Ansible role for adding DNS database record (default type: A):
+~~~
+ansible-playbook add_record.yaml
+~~~
