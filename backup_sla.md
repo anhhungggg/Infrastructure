@@ -30,12 +30,6 @@ Coverage: Excluded Services
 - Prometheus: Provisioned with Ansible along with exporters.
 - Bind: Provisioned with Ansible.
 
-RTO
-- 8 hours maximum of downtime is the way to go for our highly available services.
-
-RPO
-- We can only afford 8 hours of RTO, therefore, we should have just 12 hours of RPO to keep data loss at a minimum.
-
 Frequency
 - Datadump: every day at 23:00
 - Full backups: every day at 23:10
